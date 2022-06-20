@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Provides an HTTP header for the information/value of content attribute-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!--Setting the viewport to make website look good on all devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" type="text/css" />
+
+    <!--Specifies the URL of external script file (absolute URL)-->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!--Title of HTML Page-->
+    <title>Assignment 4</title>
+    <style>
+        p {
+            font-size: 35px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="">
+        <p class=""><b>Force Network Diagram</b></p>
+    </div>
+    <div class="tooltip"></div>
+</body>
+
+<svg></svg>
+
+<script>
+    let width = 800, height = 800;
+
+    let svg = d3.select("svg")
+        .attr("viewBox", "0 0 " + width + " " + height)
+
+    // Load external data
+    Promise.all([d3.json("links-sample.json"), d3.json("cases-sample.json")]).then(data => {
+
+        // Data preprocessing
+        data[0].forEach(e => {
+            e.source = e.infector;
+            e.target = e.infectee;
+        });
+
+        console.log(data[0]); //links
+        console.log(data[1]); //cases
+
+    })
+</script>
+</html>
